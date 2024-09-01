@@ -1,38 +1,229 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", system-ui;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Navbar Styling */
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  margin-right: 15px;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #f4b400;
+}
+
+.nav-search {
+  display: flex;
+  align-items: center;
+}
+
+.nav-search input {
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-right: 5px;
+  outline: none;
+}
+
+.nav-search button {
+  padding: 5px 15px;
+  background-color: #f4b400;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.nav-search button:hover {
+  background-color: #333;
+  transform: scale(1.05);
+}
+
+/* Movie Card Container */
+.movies-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); /* Minimum card width */
+  gap: 15px;
+  padding: 20px;
+  justify-items: center;
+}
+
+/* Movie Card Styling */
+.movie-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 175px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: center;
+}
+
+.movie-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 225px;
+  object-fit: cover;
+}
+
+.movie-card h3 {
+  font-size: 1rem;
+  margin: 10px 0;
+  color: #333;
+}
+
+.movie-card button {
+  background-color: #f4b400;
   color: white;
+  border: none;
+  padding: 5px 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.App-link {
-  color: #61dafb;
+.movie-card button:hover {
+  background-color: #333;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Media Queries for Responsiveness */
+@media (min-width: 1200px) {
+  .movies-container {
+    grid-template-columns: repeat(6, 1fr); /* 6 cards per row for desktop */
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media (max-width: 992px) {
+  .movies-container {
+    grid-template-columns: repeat(4, 1fr); /* Adjusted for large tablets or small desktops */
+  }
+}
+
+@media (max-width: 768px) {
+  .movies-container {
+    grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); /* Adjust card size for tablet */
+  }
+
+  .movie-card {
+    width: 175px;
+  }
+
+  .nav-links a {
+    font-size: 0.85rem;
+  }
+
+  .nav-search input {
+    margin: 5px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .movies-container {
+    grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); /* Adjust card size for mobile */
+  }
+
+  .movie-card {
+    width: 175px;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    font-weight: bold;
+  }
+
+  .nav-links a {
+    margin: 5px 0;
+  }
+
+  .nav-search {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Movie Details Styling */
+.movie-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.movie-details img {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  max-width: 100%;
+}
+
+.movie-info {
+  max-width: 600px;
+  text-align: left;
+}
+
+.movie-info h2 {
+  margin-bottom: 15px;
+}
+
+.movie-info p {
+  margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+  .movie-details {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .movie-details img {
+    margin-right: 20px;
+    margin-bottom: 0;
+    max-width: 300px; /* Adjust max width of the image for larger screens */
+  }
+
+  .movie-info {
+    max-width: none;
   }
 }
